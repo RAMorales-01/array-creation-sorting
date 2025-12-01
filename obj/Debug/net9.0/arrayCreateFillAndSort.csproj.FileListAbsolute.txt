@@ -1,0 +1,14 @@
+C:\Users\ruben\Desktop\practice\arrayCreateFillAndSort\bin\Debug\net9.0\arrayCreateFillAndSort.exe
+C:\Users\ruben\Desktop\practice\arrayCreateFillAndSort\bin\Debug\net9.0\arrayCreateFillAndSort.deps.json
+C:\Users\ruben\Desktop\practice\arrayCreateFillAndSort\bin\Debug\net9.0\arrayCreateFillAndSort.runtimeconfig.json
+C:\Users\ruben\Desktop\practice\arrayCreateFillAndSort\bin\Debug\net9.0\arrayCreateFillAndSort.dll
+C:\Users\ruben\Desktop\practice\arrayCreateFillAndSort\bin\Debug\net9.0\arrayCreateFillAndSort.pdb
+C:\Users\ruben\Desktop\practice\arrayCreateFillAndSort\obj\Debug\net9.0\arrayCreateFillAndSort.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ruben\Desktop\practice\arrayCreateFillAndSort\obj\Debug\net9.0\arrayCreateFillAndSort.AssemblyInfoInputs.cache
+C:\Users\ruben\Desktop\practice\arrayCreateFillAndSort\obj\Debug\net9.0\arrayCreateFillAndSort.AssemblyInfo.cs
+C:\Users\ruben\Desktop\practice\arrayCreateFillAndSort\obj\Debug\net9.0\arrayCreateFillAndSort.csproj.CoreCompileInputs.cache
+C:\Users\ruben\Desktop\practice\arrayCreateFillAndSort\obj\Debug\net9.0\arrayCreateFillAndSort.dll
+C:\Users\ruben\Desktop\practice\arrayCreateFillAndSort\obj\Debug\net9.0\refint\arrayCreateFillAndSort.dll
+C:\Users\ruben\Desktop\practice\arrayCreateFillAndSort\obj\Debug\net9.0\arrayCreateFillAndSort.pdb
+C:\Users\ruben\Desktop\practice\arrayCreateFillAndSort\obj\Debug\net9.0\arrayCreateFillAndSort.genruntimeconfig.cache
+C:\Users\ruben\Desktop\practice\arrayCreateFillAndSort\obj\Debug\net9.0\ref\arrayCreateFillAndSort.dll
