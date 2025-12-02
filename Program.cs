@@ -21,17 +21,8 @@ namespace ArraySort
             var jaggedArray = ArrayUtils.CreateJaggArray(jaggedArrayCountRows);
             ArrayUtils.InnerRowsLength(jaggedArray);
 
-            /*
-                for testing the outputs and returns, remove at the end.
-            */
-            Console.WriteLine();
-            Console.WriteLine($"[TEST] User choosed size: {jaggedArrayCountRows}");  
-            Console.WriteLine($"[TEST] Total Rows of the jagged array: {jaggedArray.Length}");
-            foreach(int[] innerArr in jaggedArray)
-            {
-                Console.WriteLine($"{innerArr.Length}");
-            }
-            Console.WriteLine("--- TEST FINISHED ---");
+            Console.WriteLine("\nThe jagged array is mostly complete, the final step is to populate each inner array.");
+            ArrayUtils.PopulateInnerArray(jaggedArray);
         }
     }
 }

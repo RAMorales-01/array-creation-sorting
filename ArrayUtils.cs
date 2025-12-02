@@ -120,5 +120,126 @@ namespace ArraySort
                 }
             }
         }
+
+        ///<summary>
+        ///Populate each inner array, by manually inserting each element manually
+        ///or automatically starting at random from 1 to 100.
+        ///</summary>
+        ///<param name="array">current array to be filled with elements</param> 
+        public static void PopulateInnerArray(int[][] array)
+        {
+            int indexOuterArray = 0;
+
+            Console.WriteLine();
+            Console.WriteLine("Here is the length of each array: ");
+
+            foreach(int[] innerArray in array)
+            {
+                Console.WriteLine($"At Index {indexOuterArray} the length is {innerArray.Length}");
+                indexOuterArray++;
+            }
+
+            Console.ReadKey();
+            Console.WriteLine();
+            bool userChoice = UserInputConfirmation("Would you like to insert manually each element on each row?", "Y/N: ");
+
+            if(userChoice == true)
+            {
+                InsertManually(array);
+            }
+            else
+            {
+                InsertAutomatically(array);
+                //for testing the outputs, remove after.
+                for(int i = 0; i < array.Length; i++)
+                {
+                    Console.WriteLine($"Row {i + 1}");
+
+                    for(int j = 0; j < array[i].Length; j++)
+                    {
+                        Console.Write(array[i][j] + " ");
+                    }
+
+                    Console.WriteLine();
+                }
+                Console.ReadKey();
+            }
+        }
+        
+        //Helper method that takes the user input to confirm an action
+        private static bool UserInputConfirmation(string prompt1, string prompt2)
+        {
+            while(true)
+            {
+                Console.Clear();
+                Console.WriteLine(prompt1);
+                Console.Write(prompt2);
+                string input = Console.ReadLine().ToLower();
+
+                if(string.Equals(input, "y", StringComparison.OrdinalIgnoreCase) || string.Equals(input, "yes", StringComparison.OrdinalIgnoreCase))
+                {
+                    return true;
+                }
+                else if(string.Equals(input, "n", StringComparison.OrdinalIgnoreCase) || string.Equals(input, "no", StringComparison.OrdinalIgnoreCase))
+                {
+                    return false;
+                }
+                else
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("ERROR INVALID INPUT: expected 'y' for yes or 'n' for no. Press any key to try again.");
+                    Console.ReadKey();
+                }
+            }
+        }
+
+        //Helper method to insert each element manually
+        private static void InsertManually(int[][] array)
+        {
+            for(int i = 0; i < array.Length; i++)
+            {
+                for(int j = 0; j < array[i].Length; j++)
+                {
+                    array[i][j] = ValidateUserInput("NOTE: the element to be inserted at the current index must be an integer.", "Enter integer: ", i + 1, j);
+                }
+            }
+        }
+
+        //Helper method to validate the user input for confirmation of an action.
+        private static int ValidateUserInput(string prompt1, string prompt2, int currentRow, int currentIndex)
+        {
+            while(true)
+            {
+                Console.Clear();
+                Console.WriteLine(prompt1);
+                Console.WriteLine($"\nYou are at index: {currentIndex} of inner array: {currentRow}");
+                Console.Write(prompt2);
+
+                if(int.TryParse(Console.ReadLine(), out int numInput))
+                {
+                    return numInput;
+                }
+                else
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("ERROR: invalid input, expected integer number. Press any key to try again.");
+                    Console.ReadKey();
+                }
+            }
+        }
+
+        //Helper method to insert each element at random, form 1 to 100.
+        private static void InsertAutomatically(int[][] array)
+        {
+            Random random = new Random();
+
+            for(int i = 0; i < array.Length; i++)
+            {
+                for(int j = 0; j < array[i].Length; j++)
+                {
+                    array[i][j] = random.Next(1, 101);
+                }
+            }
+        }
     }
 }
