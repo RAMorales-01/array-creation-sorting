@@ -3,55 +3,35 @@
 namespace ArraySort
 {
     ///<summary>
-    ///this program is a practice to test arrays
-    ///user will create array, fill with the elements and finally select the type of sort.
+    ///This program is manly a practice on how the array works, the objective is:
+    ///To create a jagged array, choose the length(how many arrays will contain the outer array) 
+    ///then selecte each inner array length and finally insert elements inside each array.
+    ///After the creation of the array is complete the user will get the chance to sort its contents.
     ///</summary>
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome user! in this test we are going to create a jagged array");
-            Console.WriteLine("fill all the inner arrays with integer numbers choosen by you and print the output.");
+            Console.Clear();
+            Console.WriteLine("This is a test to create a jagged array, insert the elements and finally sort its contents.\n");
             Console.WriteLine("To begin with the process press any key to continue.");
             Console.ReadKey();
 
-            var JaggArrSize = ChooseSize("Enter the size of the jagged array");  
+            var jaggedArrayCountRows = ArrayUtils.OuterArrayLength("Enter how many arrays will contain the jagged array"); 
+            var jaggedArray = ArrayUtils.CreateJaggArray(jaggedArrayCountRows);
+            ArrayUtils.InnerRowsLength(jaggedArray);
 
             /*
-                for testing the outputs, remove at the end.
+                for testing the outputs and returns, remove at the end.
             */
             Console.WriteLine();
-            Console.Write($"[TEST] User choosed size: {JaggArrSize}");  
-        }
-
-        ///<summary>
-        ///Ask the user to enter an integer number between 2 and 6
-        ///which will be the quantity of the inner array the outer array will contain.
-        ///</summary>
-        ///<param name="prompt">prompts the user for the size of the jagged array</param>
-        ///<returns>Integer number between 2 and 6</returns>
-        public static int ChooseSize(string prompt)
-        {
-            int size = 0;
-
-            while(true)
+            Console.WriteLine($"[TEST] User choosed size: {jaggedArrayCountRows}");  
+            Console.WriteLine($"[TEST] Total Rows of the jagged array: {jaggedArray.Length}");
+            foreach(int[] innerArr in jaggedArray)
             {
-                Console.Clear();
-                Console.WriteLine("NOTE: the outer array cannot contain less than 2 and more than 6 inner arrays.\n");
-                Console.WriteLine(prompt);
-                Console.Write("Size: ");
-
-                if(int.TryParse(Console.ReadLine(), out size) && size >= 2 && size <= 6)
-                {
-                    return size;
-                }
-                else
-                {
-                    Console.WriteLine();
-                    Console.WriteLine("ERROR: Invalid input, expected integer between 2 and 6. Press any key to try again.");
-                    Console.ReadKey();
-                }
+                Console.WriteLine($"{innerArr.Length}");
             }
+            Console.WriteLine("--- TEST FINISHED ---");
         }
     }
 }

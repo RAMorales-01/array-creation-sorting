@@ -12,3 +12,4 @@ C:\Users\ruben\Desktop\practice\arrayCreateFillAndSort\obj\Debug\net9.0\refint\a
 C:\Users\ruben\Desktop\practice\arrayCreateFillAndSort\obj\Debug\net9.0\arrayCreateFillAndSort.pdb
 C:\Users\ruben\Desktop\practice\arrayCreateFillAndSort\obj\Debug\net9.0\arrayCreateFillAndSort.genruntimeconfig.cache
 C:\Users\ruben\Desktop\practice\arrayCreateFillAndSort\obj\Debug\net9.0\ref\arrayCreateFillAndSort.dll
+C:\Users\ruben\Desktop\practice\arrayCreateFillAndSort\obj\Debug\net9.0\arrayCreateFillAndSort.sourcelink.json

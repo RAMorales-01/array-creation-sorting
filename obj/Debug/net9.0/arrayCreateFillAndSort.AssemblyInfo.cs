@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("arrayCreateFillAndSort")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8f728233e02315d4062b5307ba28ce32d19b4168")]
 [assembly: System.Reflection.AssemblyProductAttribute("arrayCreateFillAndSort")]
 [assembly: System.Reflection.AssemblyTitleAttribute("arrayCreateFillAndSort")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
