@@ -20,9 +20,6 @@ namespace ArraySort
             var jaggedArrayCountRows = ArrayUtils.OuterArrayLength("Enter how many arrays will contain the jagged array"); 
             var jaggedArray = ArrayUtils.CreateJaggArray(jaggedArrayCountRows);
             ArrayUtils.InnerRowsLength(jaggedArray);
-
-            Console.WriteLine("\nThe jagged array is mostly complete, the final step is to populate each inner array.");
-            
             ArrayUtils.PopulateInnerArray(jaggedArray);
             ArrayUtils.SortArray(jaggedArray);
         }

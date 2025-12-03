@@ -3,7 +3,7 @@ using System;
 namespace ArraySort
 {   
     ///<summary>
-    ///A representation for the type of sorting options
+    ///A representation for the four sorting options that
     ///the user will be able to choose later in the program
     ///</summary>
     public enum Sorting
@@ -15,8 +15,7 @@ namespace ArraySort
     }
 
     ///<summary>
-    ///Constants to use as limits permited for the length of the outer and inner arrays
-    ///mainly to prevent magic numbers.
+    ///Constants for the length permited of the outer and inner arrays.
     ///</summary>
     public class Constants
     {   
@@ -29,7 +28,7 @@ namespace ArraySort
 
     ///<summary>
     ///This class contains all the methods that will be used 
-    ///to create all the arrays and sorting options the user will be able to choose.
+    ///to create all the arrays and sorting options for the user.
     ///</summary>
     public class ArrayUtils
     {
@@ -46,7 +45,7 @@ namespace ArraySort
             while(true)
             {
                 Console.Clear();
-                Console.WriteLine("NOTE: the jagged array cannot contain less than 2 and more than 6 inner arrays.\n");
+                Console.WriteLine("NOTE: the jagged array cannot contain less than 2 or more than 6 inner arrays.\n");
                 Console.WriteLine(prompt);
                 Console.Write("Length: ");
 
@@ -231,11 +230,11 @@ namespace ArraySort
             }
         }
 
-        //Helper method that prints the content of the current array.
+        //Helper method that prints the current contents of the array.
         private static void DisplayArray(int[][] array)
         {
             Console.Clear();
-            Console.WriteLine($"Outer Array Length: {array.Length}");
+            Console.WriteLine($"Jagged Array total Length: {array.Length} inner arrays");
 
             for(int i = 0; i < array.Length; i++)
             {
@@ -250,6 +249,11 @@ namespace ArraySort
             }
         }
 
+        ///<summary>
+        ///Prompts user to select one of the four presented options
+        ///for sorting the contents of each array.
+        ///</summary>
+        ///<param name="array">previously created array by the user</param>
         public static void SortArray(int[][] array)
         {
             DisplayArray(array);
@@ -259,10 +263,16 @@ namespace ArraySort
             if(userChoice == true)
             {
                 Sorting selectedSort = SelectType("1- Smallest To\n2- Largest To\n3- Odd Only\n4- Even Only\n", "Type: ");
-                
-                //for testing output, remove after
-                Console.WriteLine();
-                Console.WriteLine(selectedSort);
+
+                if(selectedSort == Sorting.SmallestTo || selectedSort == Sorting.LargestTo)
+                {
+                    SmallestOrLargest(array, selectedSort);
+                    DisplayArray(array);
+                }
+                else
+                {
+                    //TODO: Method to implement the sorting for odd only or even only
+                }   
             }
             else
             {
@@ -271,6 +281,7 @@ namespace ArraySort
             }
         }
 
+        //Helper method for the selection of the type of sorting
         private static Sorting SelectType(string prompt1, string prompt2)
         {
             while(true)
@@ -295,6 +306,42 @@ namespace ArraySort
                     Console.WriteLine("ERROR: Invalid input, expected integer between 1 and 4. Press any key to try again.");
                     Console.ReadKey();
                 }
+            }
+        }
+
+        //Helper method to sort by the insertion algorithm
+        private static void SmallestOrLargest(int[][] array, Sorting selectedSort)
+        {
+            bool condition = SelectedSortingType(selectedSort);
+
+            for(int i = 0; i < array.Length; i++)
+            {
+                for(int j = 1; j < array[i].Length; j++)
+                {
+                    int selectedElement = array[i][j]; //current element to be inserted
+                    int k = j - 1; //index pointer
+
+                    while(k >= 0 && (condition ? array[i][k] > selectedElement : array[i][k] < selectedElement))
+                    {
+                        array[i][k + 1] = array[i][k];
+                        k--;
+                    }
+
+                    array[i][k + 1] = selectedElement;
+                }
+            }
+        }
+
+        //Helper method for SmallestOrLargest method, to sort by smallest or largest depending of user previous choice
+        private static bool SelectedSortingType(Sorting selectedType)
+        {
+            if(selectedType == Sorting.SmallestTo)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }
