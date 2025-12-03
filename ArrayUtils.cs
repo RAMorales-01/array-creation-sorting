@@ -10,8 +10,8 @@ namespace ArraySort
     {
         SmallestTo = 1,
         LargestTo,
-        OddTo,
-        EvenTo
+        OddOnly,
+        EvenOnly
     }
 
     ///<summary>
@@ -70,9 +70,9 @@ namespace ArraySort
         public static void InnerRowsLength(int[][] array)
         {
             Console.Clear();
-            Console.WriteLine($"The jagged array will have: {array.Length} inner arrays\n");
-            Console.WriteLine("It's time to choose the length of each inner array and fill them with integer numbers.\n");
-            Console.WriteLine("Press any key to start with the process.");
+            Console.WriteLine($"The jagged array will contain a number of: {array.Length} arrays\n");
+            Console.WriteLine("Now let's choose the length of each inner array and proceed to fill them with integer numbers.\n");
+            Console.WriteLine("Press any key to begin.");
             Console.ReadKey();
 
             for(int i = 0; i < array.Length; i++)
@@ -104,9 +104,9 @@ namespace ArraySort
             while(true)
             {
                 Console.Clear();
-                Console.WriteLine("NOTE: Each inner array can only have a min of 1 and a max of 6 in length\n");
-                Console.WriteLine($"You are currently in inner array number {currentRow} of {arrayTotalLength}");
-                Console.Write($"Length of array: ");
+                Console.WriteLine("NOTE: The minimum length permited for each inner array is of 1 and a maximum length of 6\n");
+                Console.WriteLine($"Array {currentRow} of {arrayTotalLength}");
+                Console.Write($"Length of array number {currentRow}: ");
 
                 if(int.TryParse(Console.ReadLine(), out rowLengthInput) && rowLengthInput >= Constants.minLengthInnerArr && rowLengthInput <= Constants.maxLengthInnerArr)
                 {
@@ -130,6 +130,7 @@ namespace ArraySort
         {
             int indexOuterArray = 0;
 
+            Console.Clear();
             Console.WriteLine();
             Console.WriteLine("Here is the length of each array: ");
 
@@ -141,6 +142,7 @@ namespace ArraySort
 
             Console.ReadKey();
             Console.WriteLine();
+            Console.WriteLine("NOTE: if selected 'n' each array will be filled automatically with random numbers from 1 to 100.");
             bool userChoice = UserInputConfirmation("Would you like to insert manually each element on each row?", "Y/N: ");
 
             if(userChoice == true)
@@ -150,19 +152,6 @@ namespace ArraySort
             else
             {
                 InsertAutomatically(array);
-                //for testing the outputs, remove after.
-                for(int i = 0; i < array.Length; i++)
-                {
-                    Console.WriteLine($"Row {i + 1}");
-
-                    for(int j = 0; j < array[i].Length; j++)
-                    {
-                        Console.Write(array[i][j] + " ");
-                    }
-
-                    Console.WriteLine();
-                }
-                Console.ReadKey();
             }
         }
         
@@ -171,7 +160,7 @@ namespace ArraySort
         {
             while(true)
             {
-                Console.Clear();
+                Console.WriteLine();
                 Console.WriteLine(prompt1);
                 Console.Write(prompt2);
                 string input = Console.ReadLine().ToLower();
@@ -186,7 +175,7 @@ namespace ArraySort
                 }
                 else
                 {
-                    Console.WriteLine();
+                    Console.Clear();
                     Console.WriteLine("ERROR INVALID INPUT: expected 'y' for yes or 'n' for no. Press any key to try again.");
                     Console.ReadKey();
                 }
@@ -238,6 +227,73 @@ namespace ArraySort
                 for(int j = 0; j < array[i].Length; j++)
                 {
                     array[i][j] = random.Next(1, 101);
+                }
+            }
+        }
+
+        //Helper method that prints the content of the current array.
+        private static void DisplayArray(int[][] array)
+        {
+            Console.Clear();
+            Console.WriteLine($"Outer Array Length: {array.Length}");
+
+            for(int i = 0; i < array.Length; i++)
+            {
+                Console.WriteLine($"\nInner Array at index {i}");
+
+                for(int j = 0; j < array[i].Length; j++)
+                {
+                    Console.Write($"{array[i][j]} ");
+                }
+
+                Console.WriteLine();
+            }
+        }
+
+        public static void SortArray(int[][] array)
+        {
+            DisplayArray(array);
+
+            bool userChoice = UserInputConfirmation("Would you like to sort the contents of each array?", "Y/N: ");
+            
+            if(userChoice == true)
+            {
+                Sorting selectedSort = SelectType("1- Smallest To\n2- Largest To\n3- Odd Only\n4- Even Only\n", "Type: ");
+                
+                //for testing output, remove after
+                Console.WriteLine();
+                Console.WriteLine(selectedSort);
+            }
+            else
+            {
+                Console.WriteLine();
+                Console.WriteLine("Thank you for testing the program, goodbye!\n");
+            }
+        }
+
+        private static Sorting SelectType(string prompt1, string prompt2)
+        {
+            while(true)
+            {
+                Console.Clear();
+                Console.WriteLine("Select one of the four sorting options.\n");
+                Console.WriteLine(prompt1);
+                Console.Write(prompt2);
+
+                if(int.TryParse(Console.ReadLine(), out int userInput) && userInput >= 1 && userInput <= 4)
+                {
+                    bool userChoice = UserInputConfirmation($"You selected sorting type {userInput} is this correct?", "Y/N: ");
+
+                    if(userChoice == true)
+                    {
+                        return (Sorting)userInput;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("ERROR: Invalid input, expected integer between 1 and 4. Press any key to try again.");
+                    Console.ReadKey();
                 }
             }
         }

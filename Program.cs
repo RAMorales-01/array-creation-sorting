@@ -22,7 +22,9 @@ namespace ArraySort
             ArrayUtils.InnerRowsLength(jaggedArray);
 
             Console.WriteLine("\nThe jagged array is mostly complete, the final step is to populate each inner array.");
+            
             ArrayUtils.PopulateInnerArray(jaggedArray);
+            ArrayUtils.SortArray(jaggedArray);
         }
     }
 }
