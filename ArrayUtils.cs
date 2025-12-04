@@ -8,8 +8,8 @@ namespace ArraySort
     ///</summary>
     public enum Sorting
     {
-        SmallestTo = 1,
-        LargestTo,
+        Ascending = 1,
+        Descending,
         OddOnly,
         EvenOnly
     }
@@ -247,6 +247,8 @@ namespace ArraySort
 
                 Console.WriteLine();
             }
+
+            Console.WriteLine();
         }
 
         ///<summary>
@@ -262,16 +264,27 @@ namespace ArraySort
             
             if(userChoice == true)
             {
-                Sorting selectedSort = SelectType("1- Smallest To\n2- Largest To\n3- Odd Only\n4- Even Only\n", "Type: ");
+                Sorting selectedSort = SelectType("1- Ascending\n2- Descending\n3- Odd Only\n4- Even Only\n", "Type: ");
 
-                if(selectedSort == Sorting.SmallestTo || selectedSort == Sorting.LargestTo)
+                if(selectedSort == Sorting.Ascending || selectedSort == Sorting.Descending)
                 {
-                    SmallestOrLargest(array, selectedSort);
+                    AscendingOrDescending(array, selectedSort);
                     DisplayArray(array);
                 }
-                else
+                else if(selectedSort == Sorting.OddOnly || selectedSort == Sorting.EvenOnly)
                 {
-                    //TODO: Method to implement the sorting for odd only or even only
+                    var newArray = OddsOrEven(array, selectedSort);
+                    
+                    Console.Clear();
+                    Console.WriteLine($"New array with the sorting of {selectedSort}\n");
+
+                    foreach(int element in newArray)
+                    {
+                        Console.Write($"{element} ");
+                    }
+                    
+                    Console.WriteLine();
+                    Console.WriteLine("Thank you for testing the program, goodbye!\n");
                 }   
             }
             else
@@ -310,7 +323,7 @@ namespace ArraySort
         }
 
         //Helper method to sort by the insertion algorithm
-        private static void SmallestOrLargest(int[][] array, Sorting selectedSort)
+        private static void AscendingOrDescending(int[][] array, Sorting selectedSort)
         {
             bool condition = SelectedSortingType(selectedSort);
 
@@ -333,9 +346,9 @@ namespace ArraySort
         }
 
         //Helper method for SmallestOrLargest method, to sort by smallest or largest depending of user previous choice
-        private static bool SelectedSortingType(Sorting selectedType)
+        private static bool SelectedSortingType(Sorting selectedSort)
         {
-            if(selectedType == Sorting.SmallestTo)
+            if(selectedSort == Sorting.Ascending || selectedSort == Sorting.OddOnly)
             {
                 return true;
             }
@@ -343,6 +356,53 @@ namespace ArraySort
             {
                 return false;
             }
+        }
+
+        //Helper method that creates a new array with only the odds or even of all the inner arrays 
+        private static int[] OddsOrEven(int[][] array, Sorting selectedSort)
+        {
+            int newArrayLength = OddOrEvenCount(array, selectedSort);
+            bool condition = SelectedSortingType(selectedSort);
+
+            int[] newArray = new int[newArrayLength];
+            int indexPointer = 0;
+
+            for(int i = 0; i < array.Length; i++)
+            {
+                for(int j = 0; j < array[i].Length; j++)
+                {
+                    if(condition ? array[i][j] % 2 != 0 : array[i][j] % 2 == 0)
+                    {
+                        newArray[indexPointer] = array[i][j];
+                        indexPointer++;
+                    }
+                }
+            }
+
+            return newArray;
+        }
+
+        //Helper method for OddsOrEven that returns the total count of all the odd or even integers inside all the arrays
+        private static int OddOrEvenCount(int[][] array, Sorting selectedSort)
+        {
+            int count = 0;
+
+            for(int i = 0; i < array.Length; i++)
+            {
+                for(int j = 0; j < array[i].Length; j++)
+                {
+                    if(selectedSort == Sorting.OddOnly && array[i][j] % 2 != 0)
+                    {
+                        count++;
+                    }
+                    else if(selectedSort == Sorting.EvenOnly && array[i][j] % 2 == 0)
+                    {
+                        count++;
+                    }
+                }
+            }
+
+            return count;
         }
     }
 }
