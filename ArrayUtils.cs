@@ -24,6 +24,9 @@ namespace ArraySort
 
         public const int minLengthInnerArr = 1;
         public const int maxLengthInnerArr = 6;
+
+        public const int minSortingOption = 1;
+        public const int maxSortingOption = 4;
     }
 
     ///<summary>
@@ -42,23 +45,31 @@ namespace ArraySort
         {
             int arrLengthInput = 0;
 
+            Console.Clear();
+            Console.WriteLine("NOTE: the jagged array cannot contain less than 2 or more than 6 inner arrays.\n");
+            Console.WriteLine(prompt);
+            arrLengthInput = IntegerInputValidation("Length: ", arrLengthInput, Constants.minLengthOuterArr, Constants.maxLengthOuterArr);
+
+            return arrLengthInput;
+        }
+        
+        //Helper method for integer validation
+        private static int IntegerInputValidation(string askedInput, int userInput, int minimum, int maximum)
+        {
             while(true)
             {
-                Console.Clear();
-                Console.WriteLine("NOTE: the jagged array cannot contain less than 2 or more than 6 inner arrays.\n");
-                Console.WriteLine(prompt);
-                Console.Write("Length: ");
+                Console.Write(askedInput);
 
-                if(int.TryParse(Console.ReadLine(), out arrLengthInput) && arrLengthInput >= Constants.minLengthOuterArr && arrLengthInput <= Constants.maxLengthOuterArr)
+                if(int.TryParse(Console.ReadLine(), out userInput) && userInput >= minimum && userInput <= maximum)
                 {
-                    return arrLengthInput;
+                    return userInput;
                 }
                 else
                 {
                     Console.WriteLine();
-                    Console.WriteLine("ERROR: Invalid input, expected integer between 2 and 6. Press any key to try again.");
+                    Console.WriteLine($"ERROR: Invalid input, expected integer between {minimum} and {maximum}. Press any key to try again.");
                     Console.ReadKey();
-                }
+                }            
             }
         }
 
@@ -97,27 +108,14 @@ namespace ArraySort
         //Helper method for InnerRowLength
         private static int CurrentRowLength(int currentRow, int arrayTotalLength)
         {
-            
             int rowLengthInput = 0;
 
-            while(true)
-            {
-                Console.Clear();
-                Console.WriteLine("NOTE: The minimum length permited for each inner array is of 1 and a maximum length of 6\n");
-                Console.WriteLine($"Array {currentRow} of {arrayTotalLength}");
-                Console.Write($"Length of array number {currentRow}: ");
+            Console.Clear();
+            Console.WriteLine("NOTE: The minimum length permited for each inner array is of 1 and a maximum length of 6\n");
+            Console.WriteLine($"Array {currentRow} of {arrayTotalLength}");
+            rowLengthInput = IntegerInputValidation("Length of array: ", rowLengthInput, Constants.minLengthInnerArr, Constants.maxLengthInnerArr);
 
-                if(int.TryParse(Console.ReadLine(), out rowLengthInput) && rowLengthInput >= Constants.minLengthInnerArr && rowLengthInput <= Constants.maxLengthInnerArr)
-                {
-                    return rowLengthInput;
-                }
-                else
-                {
-                    Console.WriteLine();
-                    Console.WriteLine("ERROR: invalid input, expected integer between 1 and 6. Press any key to try again.");
-                    Console.ReadKey();
-                }
-            }
+            return rowLengthInput;
         }
 
         ///<summary>
@@ -276,15 +274,14 @@ namespace ArraySort
                     var newArray = OddsOrEven(array, selectedSort);
                     
                     Console.Clear();
-                    Console.WriteLine($"New array with the sorting of {selectedSort}\n");
+                    Console.WriteLine($"New array: \n");
 
                     foreach(int element in newArray)
                     {
                         Console.Write($"{element} ");
                     }
                     
-                    Console.WriteLine();
-                    Console.WriteLine("Thank you for testing the program, goodbye!\n");
+                    Console.WriteLine("\n\nThank you for testing the program, goodbye!\n");
                 }   
             }
             else
@@ -301,10 +298,11 @@ namespace ArraySort
             {
                 Console.Clear();
                 Console.WriteLine("Select one of the four sorting options.\n");
+                Console.WriteLine("WARNING: selecting odds or evens only will create a new array with only the selected numbers.");
                 Console.WriteLine(prompt1);
                 Console.Write(prompt2);
 
-                if(int.TryParse(Console.ReadLine(), out int userInput) && userInput >= 1 && userInput <= 4)
+                if(int.TryParse(Console.ReadLine(), out int userInput) && userInput >= Constants.minSortingOption && userInput <= Constants.maxSortingOption)
                 {
                     bool userChoice = UserInputConfirmation($"You selected sorting type {userInput} is this correct?", "Y/N: ");
 
