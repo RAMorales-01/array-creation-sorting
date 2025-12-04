@@ -17,7 +17,7 @@ namespace ArraySort
     ///<summary>
     ///Constants for the length permited of the outer and inner arrays.
     ///</summary>
-    public class Constants
+    public static class Constants
     {   
         public const int minLengthOuterArr = 2;
         public const int maxLengthOuterArr= 6;
@@ -121,7 +121,7 @@ namespace ArraySort
         }
 
         ///<summary>
-        ///Populate each inner array, by manually inserting each element manually
+        ///Populate each inner array, by manually inserting each element
         ///or automatically starting at random from 1 to 100.
         ///</summary>
         ///<param name="array">current array to be filled with elements</param> 
@@ -216,7 +216,7 @@ namespace ArraySort
             }
         }
 
-        //Helper method to insert each element at random, form 1 to 100.
+        //Helper method to insert each element at random, numbers between 1 to 100.
         private static void InsertAutomatically(int[][] array)
         {
             Random random = new Random();
@@ -345,7 +345,7 @@ namespace ArraySort
             }
         }
 
-        //Helper method for SmallestOrLargest method, to sort by smallest or largest depending of user previous choice
+        //Helper method for AscendingOrDescending 
         private static bool SelectedSortingType(Sorting selectedSort)
         {
             if(selectedSort == Sorting.Ascending || selectedSort == Sorting.OddOnly)
@@ -361,10 +361,10 @@ namespace ArraySort
         //Helper method that creates a new array with only the odds or even of all the inner arrays 
         private static int[] OddsOrEven(int[][] array, Sorting selectedSort)
         {
-            int newArrayLength = OddOrEvenCount(array, selectedSort);
+            int newArrayLength = OddOrEvenCount(array, selectedSort); //returns the total count of odd or even nums on all arrays
             bool condition = SelectedSortingType(selectedSort);
 
-            int[] newArray = new int[newArrayLength];
+            int[] newArray = new int[newArrayLength]; //will contain all the odd or even numbers
             int indexPointer = 0;
 
             for(int i = 0; i < array.Length; i++)
@@ -382,7 +382,7 @@ namespace ArraySort
             return newArray;
         }
 
-        //Helper method for OddsOrEven that returns the total count of all the odd or even integers inside all the arrays
+        //Helper method for OddsOrEven returns the total count of all the odd or even nums inside all the arrays
         private static int OddOrEvenCount(int[][] array, Sorting selectedSort)
         {
             int count = 0;
